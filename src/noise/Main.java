@@ -33,7 +33,7 @@ public class Main {
 				// white noise and smooth noise seem to work fine
 				// interpolated noise produces a weird outcome...
 				float noiseValue = n.smoothNoise(x, y);
-				int scaledValue = scale256(noiseValue / 4);
+				int scaledValue = scale256(noiseValue);
 				int colorValue = ((255 << 24) | scaledValue << 16 | scaledValue << 8 | scaledValue);
 				rgbValues[y][x] = colorValue;
 			}
