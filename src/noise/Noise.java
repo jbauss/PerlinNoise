@@ -12,13 +12,6 @@ public class Noise {
 		this.seed = seed;
 	}
 	
-	public float noise(int x) {
-		int n = x + seed;
-		n = ( n << 13 ) ^ n;
-		float rand = 1 - ( (n * (n * n * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824f;
-		return rand;
-	}
-	
 	public float noise(int x, int y) {
 		int n = x + y * 57 + seed;
 		n = ( n << 13 ) ^ n;
@@ -33,26 +26,12 @@ public class Noise {
 		return rand;
 	}
 	
-	public float smoothNoise(int x) {
-		return smoothNoise(x, 0);
-	}
-	
 	public float smoothNoise(int x, int y) {
 		float corners = (noise(x+1, y+1) + noise(x+1, y-1) + noise(x-1, y+1) + noise(x-1, y-1)) / 16f;
 		float sides = (noise(x, y+1) + noise(x, y-1) + noise(x-1, y) + noise(x+1, y)) / 8f;
 		float center = noise(x, y) / 4f;
 		
 		return corners + sides + center;
-	}
-	
-	public float interpolatedNoise(float x) {
-		int integerX = (int) x;
-		float fractionalX = x - integerX;
-		
-		float v1 = smoothNoise(integerX);
-		float v2 = smoothNoise(integerX + 1);
-		
-		return interpolateCosine(v1, v2, fractionalX);
 	}
 	
 	public float interpolatedNoise(float x, float y) {
