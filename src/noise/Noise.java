@@ -61,7 +61,7 @@ public class Noise {
 	public float interpolateCosine(float a, float b, float x) {
 		float ft = x * (float)Math.PI;
 		float f = (1 - ((float)Math.cos(ft))) * 0.5f;
-		return a * (a - f) + b * f;
+		return a * (1 - f) + b * f;
 	}
 
 }
