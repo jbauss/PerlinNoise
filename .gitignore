@@ -1,4 +1,11 @@
+*.png
 *.class
+
+# Eclipse folders and files #
+
+.classpath
+.project
+.settings/
 
 # Package Files #
 *.jar
