@@ -7,13 +7,13 @@ public class Main {
 
 	// x is a number in the range min..max
 	// converts x to a number in the range [a,b]
-	public static double scaleRange(double min, double max, double a, double b, double x) {
+	public static float scaleRange(float min, float max, float a, float b, float x) {
 	    return ((b - a) * (x - min) / (max - min)) + a;
 	}
 
 	// converts x from a number in the range [-1, 1] to a number in the range [0, 255]
-	public static int scale256(double x) {
-	    return (int)Math.round(scaleRange(-1, 1, 0, 255, x));
+	public static int scale256(float x) {
+	    return Math.round(scaleRange(-1, 1, 0, 255, x));
 	}
 	
 	public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class Main {
 				// change the function to create a different kind of noise
 				// white noise and smooth noise seem to work fine
 				// interpolated noise produces a weird outcome...
-				float noiseValue = n.smoothNoise(x, y);
+				float noiseValue = n.interpolatedNoise(x, y);
 				int scaledValue = scale256(noiseValue);
 				int colorValue = ((255 << 24) | scaledValue << 16 | scaledValue << 8 | scaledValue);
 				rgbValues[y][x] = colorValue;
@@ -42,7 +42,7 @@ public class Main {
 		// Convert the array to a PNG-Image
 		BufferedImage bufferedImage = ImageExporter.convertRGBArray(rgbValues);
 		// Save that PNG-Image to the disk
-		ImageExporter.saveAsFile("smoothnoise.png", bufferedImage);
+		ImageExporter.saveAsFile("interpolatednoise.png", bufferedImage);
 	}
 
 }
